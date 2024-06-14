@@ -20,7 +20,7 @@ const asObject = (anecdote) => {
 // I also sort the items here in case the app gets data from an API and not all votes are 0
 const initialState = anecdotesAtStart.map(asObject).sort((a,b) => b.votes - a.votes)
 
-const reducer = (state = initialState, action) => {
+const anecdoteReducer = (state = initialState, action) => {
   switch(action.type) {
     case 'VOTE':
       const id = action.payload.id
@@ -57,4 +57,4 @@ export const createAnecdote = (anecdote) => {
   }
 }
 
-export default reducer
+export default anecdoteReducer
