@@ -1,3 +1,5 @@
+import { createSlice } from '@reduxjs/toolkit'
+
 const anecdotesAtStart = [
   'If it hurts, do it more often',
   'Adding manpower to a late software project makes it later!',
@@ -17,13 +19,14 @@ const asObject = (anecdote) => {
   }
 }
 
-// I also sort the items here in case the app gets data from an API and not all votes are 0
 const initialState = anecdotesAtStart.map(asObject).sort((a,b) => b.votes - a.votes)
 
-const anecdoteReducer = (state = initialState, action) => {
-  switch(action.type) {
-    case 'VOTE':
-      const id = action.payload.id
+const anecdoteSlice = createSlice({
+  name: 'anecdote',
+  initialState,
+  reducers: {
+    voteAnecdote(state, action) {
+      const id = action.payload
       const anecdote = state.find(a => a.id === id)
       const voted = {
         ...anecdote,
@@ -32,29 +35,17 @@ const anecdoteReducer = (state = initialState, action) => {
       return state
         .map(a => a.id !== id ? a : voted)
         .sort((a,b) => b.votes - a.votes)
-    case 'NEW_ANECDOTE':
-      return [...state, action.payload]
-    default:
-      return state
-  }
-}
-
-export const voteAnecdote = (id) => {
-  return {
-    type: 'VOTE',
-    payload: { id }
-  }
-}
-
-export const createAnecdote = (anecdote) => {
-  return {
-    type: 'NEW_ANECDOTE',
-    payload: {
-      content: anecdote,
-      id: getId(),
-      votes: 0
+    },
+    createAnecdote(state, action) {
+      const anecdote = action.payload
+      state.push({
+        content: anecdote,
+        id: getId(),
+        votes: 0
+      })
     }
-  }
-}
+  },
+})
 
-export default anecdoteReducer
+export const { voteAnecdote, createAnecdote } = anecdoteSlice.actions
+export default anecdoteSlice.reducer
