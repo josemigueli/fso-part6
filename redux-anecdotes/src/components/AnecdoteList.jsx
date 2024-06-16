@@ -16,7 +16,9 @@ const AnecdoteList = () => {
     }
 
     useEffect(() => {
-        const result = anecdotesBase.filter(a => a.content.toLowerCase().includes(term.toLowerCase()))
+        const result = anecdotesBase
+            .filter(a => a.content.toLowerCase().includes(term.toLowerCase()))
+            .sort((a,b) => b.votes - a.votes)
         setAnecdotes(result)
     }, [term, anecdotesBase])
 
