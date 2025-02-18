@@ -23,7 +23,7 @@ const AnecdoteForm = () => {
     onError: (err) => {
       const erroMessage = err.response.data.error
       displayNotification('ERROR', erroMessage)
-    }
+    },
   })
 
   const onCreate = (event) => {
@@ -31,15 +31,20 @@ const AnecdoteForm = () => {
     const content = event.target.anecdote.value
     event.target.anecdote.value = ''
     newAnecdoteMutation.mutate({ content, votes: 0 })
-}
+  }
 
   return (
-    <div>
-      <h3>create new</h3>
-      <form onSubmit={onCreate}>
-        <input name='anecdote' />
-        <button type="submit">create</button>
-      </form>
+    <div className='form-container'>
+      <div className='form-sub-con'>
+        <h2>Create new</h2>
+        <form className='anecdote-form' onSubmit={onCreate}>
+          <div className='form-group'>
+            <label htmlFor='anecdote'>Anecdote</label>
+            <textarea name='anecdote' id='anecdote' placeholder='Write your anecdote here...' rows={10} />
+          </div>
+          <button type='submit'>Create</button>
+        </form>
+      </div>
     </div>
   )
 }
