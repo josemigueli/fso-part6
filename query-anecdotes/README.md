@@ -90,6 +90,12 @@ The Anecdote App is a web application built with **React** and **TanStack React 
 - **`npm run server`**: Start the JSON Server.
 - **`npm run lint`**: Run ESLint to check for code issues.
 
+## Gallery
+
+### Home View
+
+![Home view](public/home.png)
+
 ## License
 
 This project is open-source and available under the MIT License.
