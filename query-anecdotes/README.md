@@ -1,4 +1,4 @@
-# Anecdote App
+# Query Anecdotes App
 
 The Anecdote App is a web application built with **React** and **TanStack React Query** for managing server state. It allows users to view, vote, and create anecdotes. The app uses a **JSON Server** as a mock backend to handle CRUD operations and includes a notification system to provide feedback to users.
 
